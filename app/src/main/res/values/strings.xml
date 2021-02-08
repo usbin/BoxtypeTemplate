@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BoxtypeTemplate</string>
+    <string name="btn_name_device">Device</string>
+    <string name="btn_name_risk">Risk</string>
+    <string name="btn_name_advise">Advise</string>
+    <string name="btn_name_activity">Activity</string>
+    <string name="btn_name_falldetection">Fall Detection</string>
+</resources>
