@@ -3,6 +3,8 @@ package com.example.boxtypetemplate
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -12,8 +14,10 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         btn_main_device.setOnClickListener {
-            val intent = Intent(this, SettingActivity::class.java);
-            startActivity(intent);
+            val fm = supportFragmentManager
+            val mt = fm.beginTransaction()
+            mt.replace(android.R.id.content, SettingActivity()).commit();
+
         }
     }
 }
