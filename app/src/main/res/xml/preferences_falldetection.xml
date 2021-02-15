@@ -1,0 +1,32 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory>
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switch_falldetection"
+            android:title="@string/btn_name_falldetection"/>
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key = "falldetection_details"
+        app:dependency="switch_falldetection">
+        <ListPreference
+            app:defaultValue="sensitivity_low"
+            app:entries="@array/sensitivity_entries"
+            app:entryValues="@array/sensitivity_values"
+            app:key="sensitivity"
+            app:title="@string/falldetection_sensitivity_title"
+            app:summary="@string/falldetection_sensitivity_summary"
+            app:useSimpleSummaryProvider="true" />
+        <SwitchPreference
+            app:defaultValue="false"
+            app:key="switch_sharefall"
+            android:title="@string/falldetection_switch_sharefalls_title"
+            android:summary="@string/falldetection_switch_sharefall_summary">
+        </SwitchPreference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

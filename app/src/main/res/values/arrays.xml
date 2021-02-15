@@ -1,0 +1,24 @@
+<resources>
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
+    </string-array>
+
+    <!-- Sensitivity Preference -->
+    <string-array name="sensitivity_entries">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+    </string-array>
+    <string-array name="sensitivity_values">
+        <item>sensitivity_low</item>
+        <item>sensitivity_medium</item>
+        <item>sensitivity_high</item>
+    </string-array>
+</resources>
