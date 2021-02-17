@@ -3,8 +3,8 @@
     <string name="app_name">BoxtypeTemplate</string>
     <string name="btn_name_device">Device</string>
     <string name="btn_name_risk">Risk</string>
-    <string name="btn_name_advise">Advise</string>
-    <string name="btn_name_activity">Activity</string>
+    <string name="btn_name_exercise">Exercise</string>
+    <string name="btn_name_management">Management</string>
     <string name="btn_name_falldetection">Fall Detection</string>
 
     <!-- 메인화면 메뉴 이름 -->
@@ -31,6 +31,10 @@
     <string name="falldetection_sensitivity_summary">Set sensitivity for detection</string>
     <string name="falldetection_switch_sharefalls_title">Share falls</string>
     <string name="falldetection_switch_sharefall_summary">Your emergency contacts will be alerted when a fall is detected</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_ex_setting">ExSettingActivity</string>
+    <string name="title_activity_ex_settings">ExSettingsActivity</string>
+    <string name="title_activity_example_setting">ExampleSettingActivity</string>
 
 
 </resources>
