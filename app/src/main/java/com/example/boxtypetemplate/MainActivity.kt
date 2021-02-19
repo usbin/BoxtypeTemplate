@@ -13,6 +13,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar_main))
 
+        btn_main_device.setOnClickListener{
+            val intent = Intent(this, DeviceActivity::class.java);
+            startActivity(intent);
+        }
+        btn_main_risk.setOnClickListener{
+            val intent = Intent(this, RiskActivity::class.java)
+            startActivity(intent);
+        }
         btn_main_falldetection.setOnClickListener {
             val intent = Intent(this, FalldetectionActivity::class.java)
             startActivity(intent);

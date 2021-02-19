@@ -17,7 +17,6 @@ class FalldetectionActivity : AppCompatActivity(), Preference.OnPreferenceChange
             .replace(R.id.falldetection_frame, FalldetectionFragment())
             .commit()
 
-
     }
 
     override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {

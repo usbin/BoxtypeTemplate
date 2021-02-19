@@ -60,13 +60,13 @@
                 android:layout_width="0dp"
                 android:layout_height="180dp"
                 android:layout_marginTop="10dp"
-                android:text="@string/btn_name_advise"
+                android:text="@string/btn_name_management"
                 app:layout_constraintEnd_toEndOf="@+id/btn_main_device"
                 app:layout_constraintStart_toStartOf="@+id/btn_main_device"
                 app:layout_constraintTop_toBottomOf="@+id/btn_main_device" />
 
             <Button
-                android:id="@+id/btn_main_management"
+                android:id="@+id/btn_main_exercise"
                 android:layout_width="0dp"
                 android:layout_height="180dp"
                 android:layout_marginTop="10dp"

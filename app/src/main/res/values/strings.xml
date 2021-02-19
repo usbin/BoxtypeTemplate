@@ -35,6 +35,13 @@
     <string name="title_activity_ex_setting">ExSettingActivity</string>
     <string name="title_activity_ex_settings">ExSettingsActivity</string>
     <string name="title_activity_example_setting">ExampleSettingActivity</string>
+    <string name="title_activity_risk">RiskActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="bluetooth_disconnected">Bluetooth disconnected</string>
+    <string name="disconnected_upper">DISCONNECTED</string>
+    <string name="connected_upper">CONNECTED</string>
+    <string name="connecting_upper">CONNECTING</string>
 
 
 </resources>
