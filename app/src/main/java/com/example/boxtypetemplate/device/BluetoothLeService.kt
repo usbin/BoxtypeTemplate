@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Binder
 import android.os.Build
+import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import androidx.annotation.RequiresApi
@@ -24,7 +25,7 @@ const val EXTRA_DATA = "com.example.bluetooth.le.EXTRA_DATA"
 val STBT_SERVICE_UUID = UUID.fromString(DeviceActivity.SCBT_SERVICE_UUID)
 
 // A service that interacts with the BLE device via the Android BLE API.
-class BluetoothLeService(private var bluetoothGatt: BluetoothGatt?) : Service() {
+class BluetoothLeService() : Service() {
 
     private var connectionState = STATE_DISCONNECTED
 
@@ -49,7 +50,7 @@ class BluetoothLeService(private var bluetoothGatt: BluetoothGatt?) : Service() 
                     broadcastUpdate(intentAction)
                     Log.i(TAG, "Connected to GATT server.")
                     Log.i(TAG, "Attempting to start service discovery: " +
-                            bluetoothGatt?.discoverServices())
+                            mBluetoothGatt?.discoverServices())
                 }
                 BluetoothProfile.STATE_DISCONNECTED -> {
                     intentAction = ACTION_GATT_DISCONNECTED
@@ -106,8 +107,9 @@ class BluetoothLeService(private var bluetoothGatt: BluetoothGatt?) : Service() 
             }
         }
     }
+
     override fun onBind(intent: Intent?): IBinder? {
-        TODO("Not yet implemented")
+        return LocalBinder()
     }
 
     private fun broadcastUpdate(action: String){
@@ -163,26 +165,32 @@ class BluetoothLeService(private var bluetoothGatt: BluetoothGatt?) : Service() 
         if(device == null){
             return false
         }
-
         mBluetoothGatt = device.connectGatt(this, false, mGattCallback, BluetoothDevice.TRANSPORT_LE)
         mBluetoothDeviceAddress = address
         mConnectionState = STATE_CONNECTING
-
         return true
+    }
+    fun disconnect(){
+        mBluetoothGatt?.disconnect()
     }
 
     companion object {
-        private const val STATE_DISCONNECTED = 0
-        private const val STATE_CONNECTING = 1
-        private const val STATE_CONNECTED = 2
+        const val TAG = "BluetoothLeService"
 
+        const val STATE_DISCONNECTED = 0
+        const val STATE_CONNECTING = 1
+        const val STATE_CONNECTED = 2
         const val ACTION_GATT_CONNECTED = "com.example.bluetooth.le.ACTION_GATT_CONNECTED"
-        const val ACTION_GATT_DISCONNECTED =
-            "com.example.bluetooth.le.ACTION_GATT_DISCONNECTED"
+        const val ACTION_GATT_DISCONNECTED = "com.example.bluetooth.le.ACTION_GATT_DISCONNECTED"
         const val ACTION_GATT_SERVICES_DISCOVERED =
             "com.example.bluetooth.le.ACTION_GATT_SERVICES_DISCOVERED"
         const val ACTION_DATA_AVAILABLE = "com.example.bluetooth.le.ACTION_DATA_AVAILABLE"
+        const val EXTRA_DATA = "com.example.bluetooth.le.EXTRA_DATA"
 
 
     }
+}
+
+class BluetoothHandler(){
+
 }

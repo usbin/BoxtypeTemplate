@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.boxtypetemplate">
 
-
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <!-- If your app targets Android 10 or higher, you can declare
-     ACCESS_FINE_LOCATION instead. -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <!-- 저전력 블루투스만 지원하는지 여부(required 속성) -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!--
+ If your app targets Android 10 or higher, you can declare
+     ACCESS_FINE_LOCATION instead.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 저전력 블루투스만 지원하는지 여부(required 속성) -->
     <!-- (PackageManager.hasSystemFeature()에서 가용성 지정 가능) -->
-    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -19,11 +22,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service
+            android:name=".device.BluetoothLeService"
+            android:enabled="true"
+            android:exported="true">
+
+        </service>
+
         <activity
             android:name=".device.DeviceActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
             android:name=".FalldetectionActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

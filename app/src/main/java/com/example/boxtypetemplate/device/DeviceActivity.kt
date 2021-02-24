@@ -28,7 +28,7 @@ import kotlin.collections.ArrayList
 
 class DeviceActivity : AppCompatActivity(){
     //버튼 이미지 상태
-    var connectionState = Companion.BLUETOOTH_DISCONNECTED
+    var localConnectionState = Companion.BLUETOOTH_DISCONNECTED
     //블루투스 연결과 동기화할 변수
     var connected = false
     var mScanning : Boolean = false
@@ -42,47 +42,25 @@ class DeviceActivity : AppCompatActivity(){
     }
     private var bluetoothLeService : BluetoothLeService? = null
     private val handler = Handler()
-    private var bluetoothGatt: BluetoothGatt? = null
-//    private val gattUpdateReceiver = object : BroadcastReceiver(){
-//        private lateinit var bluetoothLeService: BluetoothLeService
-//        override fun onReceive(context: Context, intent: Intent) {
-//            val action = intent.action
-//            when (action){
-//                ACTION_GATT_CONNECTED -> {
-//                    connected = true
-//                    updateConnectionState(R.string.connected)
-//                    (context as? Activity)?.invalidateOptionsMenu()
-//                }
-//                ACTION_GATT_DISCONNECTED -> {
-//                    connected = false
-//                    updateConnectionState(R.string.disconnected)
-//                    (context as? Activity)?.invalidateOptionsMenu()
-//                    clearUI()
-//                }
-//                ACTION_GATT_SERVICES_DISCOVERED -> {
-//                    // Show all the supported services and characteristics on the
-//                    // user interface.
-//                    displayGattServices(bluetoothLeService.getSupportedGattServices())
-//                }
-//                ACTION_DATA_AVAILABLE -> {
-//                    displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA))
-//                }
-//            }
-//        }
-//    }
-//    private val serviceConnection : ServiceConnection = object : ServiceConnection {
-//        override fun onServiceConnected(componentName: ComponentName, service : IBinder){
-//            bluetoothLeService = (service as BluetoothLeService.LocalBinder).service
-//            Log.d("connect", "service connected.")
-//            if(!bluetoothLeService?.initialize()!!){
-//                finish()
-//            }
-//
-//        }
-//        override fun onServiceDisconnected(componentName: ComponentName){
-//            bluetoothLeService = null
-//        }
-//    }
+    private val serviceConnection : ServiceConnection = object : ServiceConnection {
+        override fun onServiceConnected(componentName: ComponentName, service : IBinder){
+            bluetoothLeService = (service as BluetoothLeService.LocalBinder).service
+            Log.d("connect", "service created")
+            if(!bluetoothLeService?.initialize()!!){
+                Log.e(BluetoothLeService.TAG, "Unable to initialize Bluetooth")
+
+            }
+            if(deviceAddress != null){
+                //deviceAdress: Confirm 버튼 누를 때 초기화.
+                bluetoothLeService?.connect(deviceAddress)
+            }
+
+
+        }
+        override fun onServiceDisconnected(componentName: ComponentName){
+            bluetoothLeService = null
+        }
+    }
     //응답이 돌아올 때 실행.
     private val gattUpdateReceiver = object : BroadcastReceiver(){
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -102,54 +80,54 @@ class DeviceActivity : AppCompatActivity(){
             }
         }
     }
-    private val gattCallback = object : BluetoothGattCallback() {
-        override fun onConnectionStateChange(
-            gatt: BluetoothGatt,
-            status: Int,
-            newState: Int
-        ) {
-            val intentAction: String
-            when (newState) {
-                BluetoothProfile.STATE_CONNECTED -> {
-                    intentAction = ACTION_GATT_CONNECTED
-                    broadcastUpdate(intentAction)
-                    Log.i(TAG, "Connected to GATT server.")
-                    Log.i(TAG, "Attempting to start service discovery: " +
-                            bluetoothGatt?.discoverServices())
-                }
-                BluetoothProfile.STATE_DISCONNECTED -> {
-                    intentAction = ACTION_GATT_DISCONNECTED
-                    Log.i(TAG, "Disconnected from GATT server.")
-                    broadcastUpdate(intentAction)
-                }
-            }
-        }
-
-        // New services discovered
-        override fun onServicesDiscovered(gatt: BluetoothGatt, status: Int) {
-            when (status) {
-                BluetoothGatt.GATT_SUCCESS -> broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED)
-                else -> Log.w(TAG, "onServicesDiscovered received: $status")
-            }
-        }
-
-        // Result of a characteristic read operation
-        override fun onCharacteristicRead(
-            gatt: BluetoothGatt,
-            characteristic: BluetoothGattCharacteristic,
-            status: Int
-        ) {
-            when (status) {
-                BluetoothGatt.GATT_SUCCESS -> {
-                    broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic)
-                }
-            }
-        }
-    }
+//    private val gattCallback = object : BluetoothGattCallback() {
+//        override fun onConnectionStateChange(
+//            gatt: BluetoothGatt,
+//            status: Int,
+//            newState: Int
+//        ) {
+//            val intentAction: String
+//            when (newState) {
+//                BluetoothProfile.STATE_CONNECTED -> {
+//                    intentAction = ACTION_GATT_CONNECTED
+//                    broadcastUpdate(intentAction)
+//                    Log.i(TAG, "Connected to GATT server.")
+//                    Log.i(TAG, "Attempting to start service discovery: " +
+//                            bluetoothGatt?.discoverServices())
+//                }
+//                BluetoothProfile.STATE_DISCONNECTED -> {
+//                    intentAction = ACTION_GATT_DISCONNECTED
+//                    Log.i(TAG, "Disconnected from GATT server.")
+//                    broadcastUpdate(intentAction)
+//                }
+//            }
+//        }
+//
+//        // New services discovered
+//        override fun onServicesDiscovered(gatt: BluetoothGatt, status: Int) {
+//            when (status) {
+//                BluetoothGatt.GATT_SUCCESS -> broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED)
+//                else -> Log.w(TAG, "onServicesDiscovered received: $status")
+//            }
+//        }
+//
+//        // Result of a characteristic read operation
+//        override fun onCharacteristicRead(
+//            gatt: BluetoothGatt,
+//            characteristic: BluetoothGattCharacteristic,
+//            status: Int
+//        ) {
+//            when (status) {
+//                BluetoothGatt.GATT_SUCCESS -> {
+//                    broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic)
+//                }
+//            }
+//        }
+//    }
     val autoStopConnecting = Runnable{
         Log.d("thread", "connecting timeout. - ${CONNECTION_PERIOD}")
         connected = false
-        updateConnectionState(STATE_DISCONNECTED);
+        updateConnectionState(BluetoothLeService.STATE_DISCONNECTED);
         loadingDialog?.dismiss()
     }
     private var rvAdapter : DeviceListAdapter? = null
@@ -175,6 +153,7 @@ class DeviceActivity : AppCompatActivity(){
             Log.d("device", "name: ${deviceName}, address : $deviceMacAddress")
             //나중에 여기에 페어링 되어있으면 자동 연결하고 버튼 상태 바꾸는 것도 추가해야함!
         }
+
 //        val mDevices = bluetoothAdapter?.getProfileConnectionState()
 //        for(i in 0 until mDevices?.size!!){
 //            Log.d("device", "!!!!!!!! +${mDevices?.iterator().next()}")
@@ -187,8 +166,13 @@ class DeviceActivity : AppCompatActivity(){
 //        if(mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()
 //            &&mBluetoothAdapter.getProfileConnectionState(BluetoothHeadset.HEADSET
 //            ) == STATE_CONNECTED)
+
+
         bluetoothAdapter?.stopLeScan(leScanCallback)
         registerReceiver(gattUpdateReceiver, makeGattUpdateIntentFilter());
+        val gattServiceIntent = Intent(this, BluetoothLeService::class.java)
+        Log.d("connect", "${bindService(gattServiceIntent, serviceConnection, Context.BIND_AUTO_CREATE)}")
+
         checkPermission()
 
         // 클릭 깜빡임 효과
@@ -212,10 +196,16 @@ class DeviceActivity : AppCompatActivity(){
 
         //연결 버튼 리스너
         btn_bluetooth_state.setOnClickListener {
-            when(connectionState){
+            when(localConnectionState){
                 //연결하기
                 BLUETOOTH_DISCONNECTED -> {
                     Log.d("button", "connect button clicked")
+
+                    //서비스가 없다면
+                    //서비스 생성, 시작
+
+                    //서비스가 있다면
+                    //연결
 
                     //블루투스 연결 과정 . . .
                     //나중에 텍스트를 여기가 아니라 실제 동작부분에서 구현할 것.
@@ -263,7 +253,7 @@ class DeviceActivity : AppCompatActivity(){
                 //연결 끊기(동작 취소)
                 BLUETOOTH_CONNECTING -> {
                     Log.d("button", "disconnect button clicked(connecting)")
-                    connectionState = BLUETOOTH_DISCONNECTED
+                    localConnectionState = BLUETOOTH_DISCONNECTED
                     tv_bluetooth_state.text = getString(R.string.disconnected_upper)
                     btn_bluetooth_state.setImageResource(R.drawable.ic_baseline_bluetooth_24)
 
@@ -358,25 +348,24 @@ class DeviceActivity : AppCompatActivity(){
     }
 
     private fun connect(){
-        loadingDialog?.show()
-        connectionState = BLUETOOTH_CONNECTING
-        tv_bluetooth_state.text = getString(R.string.connecting_upper)
-        btn_bluetooth_state.setImageResource(R.drawable.ic_baseline_bluetooth_24_searching)
-        bluetoothGatt = rvAdapter?.selectedItem?.connectGatt(this, false, gattCallback)
 
-//        val gattServiceIntent = Intent(this, BluetoothLeService::class.java);
-//        bindService(gattServiceIntent, serviceConnection, Context.BIND_AUTO_CREATE)
-//        //bluetoothGatt = rvAdapter?.selectedItem?.connectGatt(this, false, gattCallback)
-//
-//        registerReceiver(gattUpdateReceiver, makeGattUpdateIntentFilter());
-//        if(bluetoothLeService != null){
-//            Log.d("connect", "bluetooth connecting started")
-//            var result = bluetoothLeService?.connect(deviceAddress)
-//
-//        }
+        Log.d("connection", "bluetoothLeService is null : ${bluetoothLeService == null}")
+
+        if(bluetoothLeService!=null){
+            bluetoothLeService!!.connect(deviceAddress)
+            localConnectionState = BLUETOOTH_CONNECTING
+            tv_bluetooth_state.text = getString(R.string.connecting_upper)
+            btn_bluetooth_state.setImageResource(R.drawable.ic_baseline_bluetooth_24_searching)
+            //bluetoothGatt = rvAdapter?.selectedItem?.connectGatt(this, false, gattCallback)
+
+            loadingDialog?.show()
+        }
+
+
+
     }
     fun disconnect(){
-        bluetoothGatt?.disconnect()
+        bluetoothLeService?.disconnect()
     }
     private fun makeGattUpdateIntentFilter() : IntentFilter? {
         val intentFilter = IntentFilter()
@@ -419,13 +408,13 @@ class DeviceActivity : AppCompatActivity(){
     fun updateConnectionState(state : Int){
         when(state){
             BLUETOOTH_CONNECTED -> {
-                connectionState = BLUETOOTH_CONNECTED
+                localConnectionState = BLUETOOTH_CONNECTED
                 tv_bluetooth_state.text = getString(R.string.connected_upper)
                 btn_bluetooth_state.setImageResource(R.drawable.ic_baseline_bluetooth_24)
 
             }
             BLUETOOTH_DISCONNECTED -> {
-                connectionState = BLUETOOTH_DISCONNECTED
+                localConnectionState = BLUETOOTH_DISCONNECTED
                 tv_bluetooth_state.text = getString(R.string.disconnected_upper)
                 btn_bluetooth_state.setImageResource(R.drawable.ic_baseline_bluetooth_24_disconnected)
 
@@ -433,17 +422,7 @@ class DeviceActivity : AppCompatActivity(){
         }
     }
     companion object {
-        private val TAG = BluetoothLeService::class.java.simpleName
 
-        private const val STATE_DISCONNECTED = 0
-        private const val STATE_CONNECTING = 1
-        private const val STATE_CONNECTED = 2
-        const val ACTION_GATT_CONNECTED = "com.example.bluetooth.le.ACTION_GATT_CONNECTED"
-        const val ACTION_GATT_DISCONNECTED = "com.example.bluetooth.le.ACTION_GATT_DISCONNECTED"
-        const val ACTION_GATT_SERVICES_DISCOVERED =
-            "com.example.bluetooth.le.ACTION_GATT_SERVICES_DISCOVERED"
-        const val ACTION_DATA_AVAILABLE = "com.example.bluetooth.le.ACTION_DATA_AVAILABLE"
-        const val EXTRA_DATA = "com.example.bluetooth.le.EXTRA_DATA"
 
         const val SCBT_SERVICE_UUID = "0000aaa0-0000-1000-8000-00805f9b34fb"
         private const val BLUETOOTH_DISCONNECTED = 1
@@ -453,7 +432,7 @@ class DeviceActivity : AppCompatActivity(){
         private const val REQUEST_ENABLE_BT = 1
         private const val PERMISSION_REQUEST_CODE = 100
 
-        private const val SCAN_PERIOD : Long = 1000
+        private const val SCAN_PERIOD : Long = 10000
         private const val CONNECTION_PERIOD : Long = 10000
     }
 }
