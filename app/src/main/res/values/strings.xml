@@ -31,17 +31,18 @@
     <string name="falldetection_sensitivity_summary">Set sensitivity for detection</string>
     <string name="falldetection_switch_sharefalls_title">Share falls</string>
     <string name="falldetection_switch_sharefall_summary">Your emergency contacts will be alerted when a fall is detected</string>
-    <string name="title_activity_settings">SettingsActivity</string>
-    <string name="title_activity_ex_setting">ExSettingActivity</string>
-    <string name="title_activity_ex_settings">ExSettingsActivity</string>
-    <string name="title_activity_example_setting">ExampleSettingActivity</string>
-    <string name="title_activity_risk">RiskActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+
+    <!-- Device 환경설정 -->
     <string name="bluetooth_disconnected">Bluetooth disconnected</string>
     <string name="disconnected_upper">DISCONNECTED</string>
     <string name="connected_upper">CONNECTED</string>
     <string name="connecting_upper">CONNECTING</string>
+    <string name="ble_not_supported">BLE not supported on your device</string>
+    <string name="permission_denied">Permission denied</string>
+    <string name="device_list_desc">Select device</string>
+    <string name="device_list_selected">Selected device</string>
+    <string name="cancel_upper">CANCEL</string>
+    <string name="confirm_upper">CONFIRM</string>
 
 
 </resources>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFFFF"
     android:visibility="visible"
-    tools:context=".DeviceActivity">
+    tools:context=".device.DeviceActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_device"
         android:layout_width="match_parent"
