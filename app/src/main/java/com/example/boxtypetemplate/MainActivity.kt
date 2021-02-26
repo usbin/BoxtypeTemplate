@@ -1,19 +1,58 @@
 package com.example.boxtypetemplate
 
-import android.content.Intent
+import android.app.ActivityManager
+import android.content.*
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.IBinder
 import android.os.Process
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import com.example.boxtypetemplate.device.DeviceActivity
+import com.example.boxtypetemplate.device.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.concurrent.timer
 
 class MainActivity : AppCompatActivity() {
+    var bluetoothLeService : BluetoothLeService? = null
+    private val gattUpdateReceiver = object : BroadcastReceiver(){
+        override fun onReceive(context: Context?, intent: Intent?) {
+            when(intent?.action){
+                BluetoothLeService.ACTION_GATT_CONNECTED -> {
+                    Log.d("MainActivity::onReceive", "connected")
+
+                }
+                BluetoothLeService.ACTION_GATT_DISCONNECTED -> {
+                    Log.d("MainActivity::onReceive", "disconnected")
+
+                }
+                BluetoothLeService.ACTION_DATA_AVAILABLE -> {
+                    Log.d("MainActivity::onReceive", "data available")
+                }
+            }
+        }
+    }
+    private val serviceConnection : ServiceConnection = object : ServiceConnection {
+        override fun onServiceConnected(componentName: ComponentName, service : IBinder){
+            bluetoothLeService = (service as BluetoothLeService.LocalBinder).service
+            Log.d("${this.javaClass.simpleName}::onServiceConnected", "service connected")
+            if(!bluetoothLeService?.initialize()!!){
+                Log.e(BluetoothLeService.TAG, "Unable to initialize Bluetooth")
+
+            }
+            Log.d("service", "${BluetoothLeService?.connectionState}")
+//            if(deviceAddress != null){
+//                //deviceAdress: Confirm 버튼 누를 때 초기화.
+//                bluetoothLeService?.connect(deviceAddress)
+//            }
+        }
+        override fun onServiceDisconnected(componentName: ComponentName){
+            bluetoothLeService = null
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,6 +72,20 @@ class MainActivity : AppCompatActivity() {
 
         
 
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        Log.d("service", "BLE Running State : ${isBleServiceRunning()}")
+        if(isBleServiceRunning()){
+            Intent(this, BluetoothLeService::class.java).also { intent ->
+                bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
+            }
+        }
+        registerReceiver(gattUpdateReceiver, makeGattUpdateIntentFilter())
         btn_main_device.setOnClickListener{
             val intent = Intent(this, DeviceActivity::class.java);
             startActivity(intent);
@@ -43,6 +96,27 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
+    }
+
+    private fun makeGattUpdateIntentFilter() : IntentFilter? {
+        val intentFilter = IntentFilter()
+        intentFilter.addAction(BluetoothLeService.ACTION_GATT_CONNECTED)
+        intentFilter.addAction(BluetoothLeService.ACTION_GATT_DISCONNECTED)
+        intentFilter.addAction(BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED)
+        intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE)
+        return intentFilter
+    }
+    private fun isBleServiceRunning() : Boolean{
+        val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        for(service in manager.getRunningServices(Int.MAX_VALUE)){
+            Log.d("service", "${BluetoothLeService.javaClass.name.split("$")} ----- ${service.service.className}")
+            if(BluetoothLeService.javaClass.name.split("$")[0] == service.service.className){
+
+                return true;
+            }
+        }
+        return false;
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
