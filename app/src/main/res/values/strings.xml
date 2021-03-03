@@ -1,4 +1,8 @@
 <resources>
+    <!-- 공용 -->
+    <string name="unknown_service">Unknown service</string>
+    <string name="unknown_characteristic">Unknown characteristic</string>
+
     <!-- 메인화면 버튼 이름 -->
     <string name="app_name">BoxtypeTemplate</string>
     <string name="btn_name_device">Device</string>
@@ -6,9 +10,39 @@
     <string name="btn_name_exercise">Exercise</string>
     <string name="btn_name_management">Management</string>
     <string name="btn_name_falldetection">Fall Detection</string>
-
     <!-- 메인화면 메뉴 이름 -->
     <string name="main_setting">Setting</string>
+
+    <!-- Device 액티비티 -->
+    <string name="bluetooth_disconnected">Bluetooth disconnected</string>
+    <string name="disconnected_upper">DISCONNECTED</string>
+    <string name="connected_upper">CONNECTED</string>
+    <string name="connecting_upper">CONNECTING</string>
+    <string name="ble_not_supported">BLE not supported on your device</string>
+    <string name="permission_denied">Permission denied</string>
+    <string name="device_list_desc">Select device</string>
+    <string name="device_list_selected">Selected device</string>
+    <string name="cancel_upper">CANCEL</string>
+    <string name="confirm_upper">CONFIRM</string>
+    <!-- Device 환경설정 -->
+    <string name="device_menu_setting_title">Setting</string>
+    <string name="switch_device_enable_title">Device On</string>
+    <string name="switch_calls_notifications_title">Calls notifications</string>
+    <string name="switch_Connection_loss_alerts_title">Connection loss alerts</string>
+    <string name="switch_calls_notifications_summary">Device will blink blue when you get a call</string>
+    <string name="switch_Connection_loss_alerts_summary">Receive alerts when device disconnects from app</string>
+
+    <!-- Risk 액티비티 -->
+    <string name="risk_bottom_tab_risk_title">Risk</string>
+    <string name="risk_bottom_tab_goal_title">Goal</string>
+    <string name="risk_bottom_tab_step_title">Step</string>
+    <string name="risk_bottom_tab_speed_title">Speed</string>
+
+    <!-- Fall detection 환경설정 -->
+    <string name="falldetection_sensitivity_title">Sensitivity</string>
+    <string name="falldetection_sensitivity_summary">Set sensitivity for detection</string>
+    <string name="falldetection_switch_sharefalls_title">Share falls</string>
+    <string name="falldetection_switch_sharefall_summary">Your emergency contacts will be alerted when a fall is detected</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
@@ -25,26 +59,14 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <!-- TODO: Remove or change this placeholder text -->
-
-    <!-- Fall detection 환경설정 -->
-    <string name="falldetection_sensitivity_title">Sensitivity</string>
-    <string name="falldetection_sensitivity_summary">Set sensitivity for detection</string>
-    <string name="falldetection_switch_sharefalls_title">Share falls</string>
-    <string name="falldetection_switch_sharefall_summary">Your emergency contacts will be alerted when a fall is detected</string>
-
-    <!-- Device 환경설정 -->
-    <string name="bluetooth_disconnected">Bluetooth disconnected</string>
-    <string name="disconnected_upper">DISCONNECTED</string>
-    <string name="connected_upper">CONNECTED</string>
-    <string name="connecting_upper">CONNECTING</string>
-    <string name="ble_not_supported">BLE not supported on your device</string>
-    <string name="permission_denied">Permission denied</string>
-    <string name="device_list_desc">Select device</string>
-    <string name="device_list_selected">Selected device</string>
-    <string name="cancel_upper">CANCEL</string>
-    <string name="confirm_upper">CONFIRM</string>
-    <string name="unknown_service">Unknown service</string>
-    <string name="unknown_characteristic">Unknown characteristic</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_risk_setting">RiskSettingActivity</string>
+    <string name="risk_menu_setting_title">Setting</string>
+    <string name="switch_risk_share_fall_risk_title">Share fall risk</string>
+    <string name="btn_risk_setting_tutorial_title">View tutorial</string>
+    <string name="btn_risk_setting_diagnosis_title">Fear of falling questionnaire</string>
+    <string name="btn_risk_setting_question_title">Fear of fall questionnaire</string>
+    <!-- TODO: Remove or change this placeholder text -->
 
 
 </resources>

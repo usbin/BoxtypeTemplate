@@ -22,14 +22,14 @@
         android:id="@+id/btn_bluetooth_state"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:background="@drawable/circle_background"
+        android:background="@drawable/device_connect_btn_circle_background"
         android:contentDescription="@string/bluetooth_disconnected"
         android:tint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_bluetooth_24_disconnected" />
+        app:srcCompat="@drawable/device_connect_btn_bluetooth_disconnected_icon" />
 
     <TextView
         android:id="@+id/tv_bluetooth_state"

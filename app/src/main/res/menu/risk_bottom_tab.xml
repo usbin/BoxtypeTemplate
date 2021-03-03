@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/risk_bottom_tab_risk"
+        android:icon="@drawable/risk_bottom_tab_risk_icon"
+        android:title="@string/risk_bottom_tab_risk_title"
+        app:showAsAction="withText"
+        >
+
+    </item>
+    <item
+        android:id="@+id/risk_bottom_tab_goal"
+        android:icon="@drawable/risk_bottom_tab_goal_icon"
+        android:title="@string/risk_bottom_tab_goal_title"
+        app:showAsAction="withText">
+
+    </item>
+    <item
+        android:id="@+id/risk_bottom_tab_step"
+        android:icon="@drawable/risk_bottom_tab_step_icon"
+        android:title="@string/risk_bottom_tab_step_title"
+        app:showAsAction="withText">
+
+    </item>
+    <item
+        android:id="@+id/risk_bottom_tab_speed"
+        android:icon="@drawable/risk_bottom_tab_speed_icon"
+        android:title="@string/risk_bottom_tab_speed_title"
+        app:showAsAction="withText">
+
+    </item>
+</menu>

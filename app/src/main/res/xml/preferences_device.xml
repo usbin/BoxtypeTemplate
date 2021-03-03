@@ -1,0 +1,28 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory>
+
+        <SwitchPreferenceCompat
+            app:key="switch_device_enable"
+            app:title="@string/switch_device_enable_title" />
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+       app:dependency="switch_device_enable">
+        <SwitchPreferenceCompat
+            app:key="switch_calls_notifications"
+            app:title="@string/switch_calls_notifications_title"
+            app:summary="@string/switch_calls_notifications_summary"/>
+
+        <SwitchPreferenceCompat
+            app:key="switch_Connection_loss_alerts"
+            app:title="@string/switch_Connection_loss_alerts_title"
+            app:summary="@string/switch_Connection_loss_alerts_summary"/>
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

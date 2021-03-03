@@ -11,11 +11,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
 import android.util.Log
-import android.view.MotionEvent
-import android.view.View
-import android.view.WindowManager
+import android.view.*
 import android.widget.Button
-import android.widget.SimpleExpandableListAdapter
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -150,25 +147,6 @@ class DeviceActivity : AppCompatActivity(){
 
 
 
-        // 클릭 깜빡임 효과
-        btn_bluetooth_state.setOnTouchListener(fun(v: View, event: MotionEvent): Boolean {
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    btn_bluetooth_state.background = ContextCompat.getDrawable(
-                        this,
-                        R.drawable.circle_background_down
-                    )
-                }
-                MotionEvent.ACTION_UP -> {
-                    btn_bluetooth_state.background = ContextCompat.getDrawable(
-                        this,
-                        R.drawable.circle_background
-                    )
-                }
-            }
-            return false
-        })
-
         //연결 버튼 리스너
         btn_bluetooth_state.setOnClickListener {
             when(localConnectionState){
@@ -205,7 +183,7 @@ class DeviceActivity : AppCompatActivity(){
                     }
 
                     //취소 버튼 설정
-                    dialogView.btn_device_list_cancel.setOnTouchListener(BlinkingBtnEffectListener())
+                    //dialogView.btn_device_list_cancel.setOnTouchListener(BlinkingBtnEffectListener())
                     dialogView.btn_device_list_cancel.setOnClickListener {
                         dialog.dismiss()
 
@@ -224,7 +202,7 @@ class DeviceActivity : AppCompatActivity(){
                 BluetoothLeService.STATE_CONNECTING -> {
                     updateConnectionState(BluetoothLeService.STATE_CONNECTING)
                     tv_bluetooth_state.text = getString(R.string.disconnected_upper)
-                    btn_bluetooth_state.setImageResource(R.drawable.ic_baseline_bluetooth_24)
+                    btn_bluetooth_state.setImageResource(R.drawable.device_connect_btn_bluetooth_connected_icon)
 
                     disconnect()
                     //블루투스 연결 과정 중지, 처음으로 돌아감.
@@ -431,22 +409,37 @@ class DeviceActivity : AppCompatActivity(){
             BluetoothLeService.STATE_CONNECTED -> {
                 localConnectionState = BluetoothLeService.STATE_CONNECTED
                 tv_bluetooth_state.text = getString(R.string.connected_upper)
-                btn_bluetooth_state.setImageResource(R.drawable.ic_baseline_bluetooth_24)
+                btn_bluetooth_state.setImageResource(R.drawable.device_connect_btn_bluetooth_connected_icon)
 
             }
             BluetoothLeService.STATE_CONNECTING -> {
                 localConnectionState = BluetoothLeService.STATE_CONNECTING
                 tv_bluetooth_state.text = getString(R.string.connecting_upper)
-                btn_bluetooth_state.setImageResource(R.drawable.ic_baseline_bluetooth_24_searching)
+                btn_bluetooth_state.setImageResource(R.drawable.device_connect_btn_bluetooth_connecting_icon)
             }
             BluetoothLeService.STATE_DISCONNECTED -> {
                 localConnectionState = BluetoothLeService.STATE_DISCONNECTED
                 tv_bluetooth_state.text = getString(R.string.disconnected_upper)
-                btn_bluetooth_state.setImageResource(R.drawable.ic_baseline_bluetooth_24_disconnected)
+                btn_bluetooth_state.setImageResource(R.drawable.device_connect_btn_bluetooth_disconnected_icon)
 
             }
 
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.device_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.device_menu_setting -> {
+                val intent = Intent(this, DeviceSettingActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
     companion object {
 

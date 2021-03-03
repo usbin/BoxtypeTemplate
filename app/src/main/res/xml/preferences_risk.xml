@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory>
+        <SwitchPreferenceCompat
+            app:key="switch_risk_share_fall_risk"
+            app:title="@string/switch_risk_share_fall_risk_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory>
+        <PreferenceScreen
+            app:key="btn_risk_setting_tutorial"
+            app:title="@string/btn_risk_setting_tutorial_title">
+            <intent
+                android:targetPackage="com.example.boxtypetemplate"
+                android:targetClass="com.example.boxtypetemplate.risk.RiskTutorialActivity"/>
+        </PreferenceScreen>
+        <PreferenceScreen
+            app:key="btn_risk_setting_question"
+            app:title="@string/btn_risk_setting_question_title">
+            <intent
+                android:targetPackage="com.example.boxtypetemplate"
+                android:targetClass="com.example.boxtypetemplate.risk.RiskQuestionActivity"/>
+        </PreferenceScreen>
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
