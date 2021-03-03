@@ -1,4 +1,4 @@
 package com.example.boxtypetemplate.management
 
-data class VideoData(val title:String, val path : String) {
+data class VideoData(var title:String, var path : String) {
 }

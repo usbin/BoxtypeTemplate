@@ -1,5 +1,6 @@
 package com.example.boxtypetemplate.management
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -55,10 +56,15 @@ class FitVideoFragment : Fragment(){
 
     override fun onResume() {
         super.onResume()
-        rv_management_fitvideo.adapter = ManagementVideoAdapter()
+        val adapter = ManagementVideoAdapter()
+        adapter.context = this.context
+        rv_management_fitvideo.adapter = adapter
         rv_management_fitvideo.layoutManager = LinearLayoutManager(view?.context, LinearLayoutManager.VERTICAL, false)
     }
 
+    companion object{
+        val FULLSCREEN_REQUEST = 1000
+    }
 }
 
 class VitalVideoFragment:Fragment(){
