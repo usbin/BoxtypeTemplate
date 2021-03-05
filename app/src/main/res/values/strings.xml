@@ -8,7 +8,7 @@
     <string name="btn_name_device">Device</string>
     <string name="btn_name_risk">Risk</string>
     <string name="btn_name_exercise">Exercise</string>
-    <string name="btn_name_management">Management</string>
+    <string name="btn_name_video">video</string>
     <string name="btn_name_falldetection">Fall Detection</string>
     <!-- 메인화면 메뉴 이름 -->
     <string name="main_setting">Setting</string>

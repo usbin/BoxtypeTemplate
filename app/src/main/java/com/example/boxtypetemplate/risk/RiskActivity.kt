@@ -36,10 +36,34 @@ class RiskActivity : AppCompatActivity(){
         override fun getItemCount(): Int = 4
         override fun createFragment(position: Int): Fragment {
             return when (position) {
-                0 -> RiskTabFragment()
-                1 -> GoalTabFragment()
-                2 -> StepTabFragment()
-                3 -> SpeedTabFragment()
+                0 -> {
+                    RiskTabFragment().apply {
+                        arguments = Bundle().apply {
+                            putString("tabTitle", "risk")
+                        }
+                    }
+                }
+                1 -> {
+                    RiskTabFragment().apply {
+                        arguments = Bundle().apply {
+                            putString("tabTitle", "goal")
+                        }
+                    }
+                }
+                2 -> {
+                    RiskTabFragment().apply {
+                        arguments = Bundle().apply {
+                            putString("tabTitle", "step")
+                        }
+                    }
+                }
+                3 -> {
+                    RiskTabFragment().apply {
+                        arguments = Bundle().apply {
+                            putString("tabTitle", "speed")
+                        }
+                    }
+                }
                 else -> error("no such position: ${position}")
             }
         }

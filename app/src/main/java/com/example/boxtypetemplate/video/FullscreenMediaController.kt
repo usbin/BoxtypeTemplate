@@ -1,4 +1,4 @@
-package com.example.boxtypetemplate.management
+package com.example.boxtypetemplate.video
 
 //import android.R
 //import android.app.Activity

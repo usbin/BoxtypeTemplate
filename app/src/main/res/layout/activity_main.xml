@@ -60,12 +60,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_main" />
 
             <Button
-                android:id="@+id/btn_main_management"
+                android:id="@+id/btn_main_video"
                 android:layout_width="0dp"
                 android:layout_height="180dp"
                 android:layout_marginTop="10dp"
-                android:text="@string/btn_name_management"
+                android:text="@string/btn_name_video"
                 android:textSize="20dp"
+                android:drawableTop="@drawable/main_video_btn_icon"
                 app:layout_constraintEnd_toEndOf="@+id/btn_main_device"
                 app:layout_constraintStart_toStartOf="@+id/btn_main_device"
                 app:layout_constraintTop_toBottomOf="@+id/btn_main_device" />
@@ -90,9 +91,9 @@
                 android:text="@string/btn_name_falldetection"
                 android:textSize="20dp"
                 android:drawableTop="@drawable/main_fall_detection_btn_icon"
-                app:layout_constraintEnd_toEndOf="@+id/btn_main_management"
+                app:layout_constraintEnd_toEndOf="@+id/btn_main_video"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_main_management" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_main_video" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

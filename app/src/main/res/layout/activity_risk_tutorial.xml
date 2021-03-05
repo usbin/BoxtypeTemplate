@@ -8,6 +8,7 @@
     tools:context=".risk.RiskTutorialActivity">
 
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_risk_tutorial"
         android:layout_width="match_parent"
@@ -31,5 +32,7 @@
 
 
     </androidx.viewpager2.widget.ViewPager2>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,12 +1,10 @@
-package com.example.boxtypetemplate.management
+package com.example.boxtypetemplate.video
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -14,17 +12,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.boxtypetemplate.R
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.activity_management.*
-import kotlinx.android.synthetic.main.dialog_device_list.*
-import kotlinx.android.synthetic.main.fragment_management_fitvideo.*
+import kotlinx.android.synthetic.main.activity_video.*
+import kotlinx.android.synthetic.main.fragment_video_fitvideo.*
 
-class ManagementActivity : AppCompatActivity() {
+
+class videoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_management)
+        setContentView(R.layout.activity_video)
 
-        pager_management.adapter = ManagementPageAdapter(supportFragmentManager, lifecycle)
-        TabLayoutMediator(tab_management, pager_management) { tab, position ->
+        pager_video.adapter = videoPageAdapter(supportFragmentManager, lifecycle)
+        TabLayoutMediator(tab_video, pager_video) { tab, position ->
             when(position){
                 0 -> tab.text = "Fit video"
                 1 -> tab.text = "Vital video"
@@ -33,7 +31,7 @@ class ManagementActivity : AppCompatActivity() {
 
     }
 
-    private inner class ManagementPageAdapter(fm: FragmentManager, lc: Lifecycle): FragmentStateAdapter(fm,lc){
+    private inner class videoPageAdapter(fm: FragmentManager, lc: Lifecycle): FragmentStateAdapter(fm,lc){
         override fun getItemCount(): Int = 2
         override fun createFragment(position: Int): Fragment {
             return when (position) {
@@ -51,20 +49,17 @@ class FitVideoFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_management_fitvideo, container, false)
+        return inflater.inflate(R.layout.fragment_video_fitvideo, container, false)
     }
 
     override fun onResume() {
         super.onResume()
-        val adapter = ManagementVideoAdapter()
+        val adapter = videoVideoAdapter()
         adapter.context = this.context
-        rv_management_fitvideo.adapter = adapter
-        rv_management_fitvideo.layoutManager = LinearLayoutManager(view?.context, LinearLayoutManager.VERTICAL, false)
+        rv_video_fitvideo.adapter = adapter
+        rv_video_fitvideo.layoutManager = LinearLayoutManager(view?.context, LinearLayoutManager.VERTICAL, false)
     }
 
-    companion object{
-        val FULLSCREEN_REQUEST = 1000
-    }
 }
 
 class VitalVideoFragment:Fragment(){
@@ -73,6 +68,6 @@ class VitalVideoFragment:Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_management_vitalvideo, container, false)
+        return inflater.inflate(R.layout.fragment_video_vitalvideo, container, false)
     }
 }

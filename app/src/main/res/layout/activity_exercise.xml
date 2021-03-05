@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".exercise.ExerciseActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_exercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/Theme.AppCompat.Light"
+        app:titleTextColor="@color/white" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_rectangle_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_exercise"
+        app:layout_constraintVertical_bias="0">
+
+        <Spinner
+            android:id="@+id/spinner_exercise_calender"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:dropDownVerticalOffset="40dp"
+            android:gravity="center"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </Spinner>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:padding="0dp"
+        android:background="@drawable/border_rectangle"
+        app:layout_constraintBottom_toTopOf="@+id/ConstraintLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ConstraintLayout3">
+
+
+
+                <FrameLayout
+                    android:id="@+id/fl_exercise_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/ConstraintLayout4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_exercise_goal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/transparent"
+                            android:text="Goal : "
+                            android:textColor="@color/black"
+                            android:textSize="22sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ProgressBar
+                            android:id="@+id/cpb_exercise_graph"
+                            android:layout_width="300dp"
+                            android:layout_height="300dp"
+                            android:layout_marginTop="10dp"
+                            android:indeterminateOnly="false"
+                            android:progressDrawable="@drawable/circular_progress_bar"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_exercise_goal"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <ImageView
+                            android:id="@+id/imageview_exercise_step"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_exercise_step"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/cpb_exercise_graph"
+                            app:srcCompat="@drawable/risk_bottom_tab_step_icon" />
+
+                        <TextView
+                            android:id="@+id/tv_exercise_step"
+                            android:layout_width="60dp"
+                            android:layout_height="30dp"
+                            android:text="TextView"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageview_exercise_step"
+                            app:layout_constraintStart_toEndOf="@+id/imageview_exercise_step"
+                            app:layout_constraintTop_toTopOf="@+id/imageview_exercise_step" />
+
+                        <TextView
+                            android:id="@+id/tv_bar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="|"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_exercise_step"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/tv_exercise_step" />
+
+                        <ImageView
+                            android:id="@+id/imageview_exercise_run"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_exercise_step"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_exercise_run"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/tv_bar"
+                            app:layout_constraintTop_toTopOf="@+id/tv_exercise_step"
+                            app:srcCompat="@drawable/risk_bottom_tab_speed_icon" />
+
+                        <TextView
+                            android:id="@+id/tv_exercise_run"
+                            android:layout_width="60dp"
+                            android:layout_height="30dp"
+                            android:text="TextView"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageview_exercise_run"
+                            app:layout_constraintStart_toEndOf="@+id/imageview_exercise_run"
+                            app:layout_constraintTop_toTopOf="@+id/imageview_exercise_run" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/fl_exercise_content_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:visibility="invisible">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/ConstraintLayout_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <ImageView
+                            android:id="@+id/imageview_exercise_details_step"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="50dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_exercise_details_step"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/risk_bottom_tab_step_icon" />
+
+                        <TextView
+                            android:id="@+id/tv_exercise_details_step"
+                            android:layout_width="150dp"
+                            android:layout_height="0dp"
+                            android:text="TextView"
+                            android:textColor="#000000"
+                            android:textSize="24sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageview_exercise_details_step"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.6"
+                            app:layout_constraintStart_toEndOf="@+id/imageview_exercise_details_step"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/imageview_exercise_details_step" />
+
+                        <ImageView
+                            android:id="@+id/imageview_exercise_details_cal"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="20dp"
+                            app:layout_constraintEnd_toEndOf="@+id/imageview_exercise_details_step"
+                            app:layout_constraintStart_toStartOf="@+id/imageview_exercise_details_step"
+                            app:layout_constraintTop_toBottomOf="@+id/imageview_exercise_details_step"
+                            app:srcCompat="@drawable/risk_bottom_tab_step_icon" />
+
+                        <TextView
+                            android:id="@+id/tv_exercise_details_cal"
+                            android:layout_width="150dp"
+                            android:layout_height="0dp"
+                            android:text="TextView"
+                            android:textColor="#000000"
+                            android:textSize="24sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageview_exercise_details_cal"
+                            app:layout_constraintEnd_toEndOf="@+id/tv_exercise_details_step"
+                            app:layout_constraintStart_toStartOf="@+id/tv_exercise_details_step"
+                            app:layout_constraintTop_toTopOf="@id/imageview_exercise_details_cal" />
+
+                        <ImageView
+                            android:id="@+id/imageview_exercise_details_meter"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="20dp"
+                            app:layout_constraintEnd_toEndOf="@+id/imageview_exercise_details_cal"
+                            app:layout_constraintStart_toStartOf="@+id/imageview_exercise_details_cal"
+                            app:layout_constraintTop_toBottomOf="@+id/imageview_exercise_details_cal"
+                            app:srcCompat="@drawable/risk_bottom_tab_step_icon" />
+
+                        <TextView
+                            android:id="@+id/tv_exercise_details_meter"
+                            android:layout_width="150dp"
+                            android:layout_height="0dp"
+                            android:text="TextView"
+                            android:textColor="#000000"
+                            android:textSize="24sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageview_exercise_details_meter"
+                            app:layout_constraintEnd_toEndOf="@+id/tv_exercise_details_cal"
+                            app:layout_constraintStart_toStartOf="@+id/tv_exercise_details_cal"
+                            app:layout_constraintTop_toTopOf="@id/imageview_exercise_details_meter" />
+                        <ImageView
+                            android:id="@+id/imageview_exercise_details_speed"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="20dp"
+                            app:layout_constraintEnd_toEndOf="@+id/imageview_exercise_details_meter"
+                            app:layout_constraintStart_toStartOf="@+id/imageview_exercise_details_meter"
+                            app:layout_constraintTop_toBottomOf="@+id/imageview_exercise_details_meter"
+                            app:srcCompat="@drawable/risk_bottom_tab_step_icon" />
+
+                        <TextView
+                            android:id="@+id/tv_exercise_details_speed"
+                            android:layout_width="150dp"
+                            android:layout_height="0dp"
+                            android:text="TextView"
+                            android:textColor="#000000"
+                            android:textSize="24sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageview_exercise_details_speed"
+                            app:layout_constraintEnd_toEndOf="@+id/tv_exercise_details_meter"
+                            app:layout_constraintStart_toStartOf="@+id/tv_exercise_details_meter"
+                            app:layout_constraintTop_toTopOf="@id/imageview_exercise_details_speed" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
+                <Button
+                    android:id="@+id/btn_exercise_toggle_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#00FFFFFF"
+                    android:text="details >"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fl_exercise_content" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btn_exercise_sun"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/exercise_week_btn_background"
+            android:text="S"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_exercise_mon"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btn_exercise_mon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/exercise_week_btn_background"
+            android:text="M"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_exercise_sun"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/btn_exercise_tue"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_exercise_tue"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/exercise_week_btn_background"
+            android:text="T"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_exercise_wed"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_exercise_mon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_exercise_wed"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/exercise_week_btn_background"
+            android:text="W"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_exercise_thu"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_exercise_tue"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_exercise_thu"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/exercise_week_btn_background"
+            android:text="T"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_exercise_fri"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_exercise_wed"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_exercise_fri"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/exercise_week_btn_background"
+            android:text="F"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_exercise_sat"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_exercise_thu"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_exercise_sat"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/exercise_week_btn_background"
+            android:text="S"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_exercise_fri"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,21 +2,17 @@ package com.example.boxtypetemplate
 
 import android.app.ActivityManager
 import android.content.*
-import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
-import android.os.Process
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import com.example.boxtypetemplate.device.*
-import com.example.boxtypetemplate.management.ManagementActivity
+import com.example.boxtypetemplate.exercise.ExerciseActivity
+import com.example.boxtypetemplate.video.videoActivity
 import com.example.boxtypetemplate.risk.RiskActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.concurrent.timer
 
 class MainActivity : AppCompatActivity() {
     var bluetoothLeService : BluetoothLeService? = null
@@ -98,9 +94,14 @@ class MainActivity : AppCompatActivity() {
             val intent =Intent(this, RiskActivity::class.java)
             startActivity(intent)
         }
-        //Management Activity 실행
-        btn_main_management.setOnClickListener {
-            val intent = Intent(this, ManagementActivity::class.java)
+        //video Activity 실행
+        btn_main_video.setOnClickListener {
+            val intent = Intent(this, videoActivity::class.java)
+            startActivity(intent)
+        }
+        //Exercise Activity 실행
+        btn_main_exercise.setOnClickListener {
+            val intent = Intent(this, ExerciseActivity::class.java)
             startActivity(intent)
         }
         //Fall Detection Activity 실행

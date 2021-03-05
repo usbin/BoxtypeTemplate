@@ -1,4 +1,4 @@
-package com.example.boxtypetemplate.management
+package com.example.boxtypetemplate.video
 
 import android.content.Intent
 import android.net.Uri
@@ -24,7 +24,6 @@ class FullScreenVideoActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
-        supportActionBar!!.hide()
         val videoUri =
             Uri.parse(videoData?.path)
         videoView?.setVideoURI(videoUri)

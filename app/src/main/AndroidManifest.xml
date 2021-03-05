@@ -22,44 +22,49 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".management.FullScreenVideoActivity">
-        </activity>
-        <activity android:name=".management.ManagementActivity"></activity>
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name=".exercise.ExerciseActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".video.FullScreenVideoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".video.videoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".risk.RiskQuestionActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".risk.RiskTutorialActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".risk.RiskSettingActivity"
-            android:label="@string/title_activity_risk_setting"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".risk.RiskActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize" />
 
         <service
             android:name=".device.BluetoothLeService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity
             android:name=".device.DeviceSettingActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".device.DeviceActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".FalldetectionActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".SettingActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
