@@ -33,10 +33,27 @@
     <string name="switch_Connection_loss_alerts_summary">Receive alerts when device disconnects from app</string>
 
     <!-- Risk 액티비티 -->
+    <string name="title_activity_risk_setting">RiskSettingActivity</string>
     <string name="risk_bottom_tab_risk_title">Risk</string>
     <string name="risk_bottom_tab_goal_title">Goal</string>
     <string name="risk_bottom_tab_step_title">Step</string>
     <string name="risk_bottom_tab_speed_title">Speed</string>
+    <!-- Risk 액티비티 설정 -->
+    <string name="risk_menu_setting_title">Setting</string>
+    <string name="switch_risk_share_fall_risk_title">Share fall risk</string>
+    <string name="btn_risk_setting_tutorial_title">View tutorial</string>
+    <string name="btn_risk_setting_diagnosis_title">Fear of falling questionnaire</string>
+    <string name="btn_risk_setting_question_title">Fear of fall questionnaire</string>
+
+    <!-- Video 액티비티 -->
+
+    <!-- Exercise 액티비티 설정-->
+    <string name="exercise_menu_setting_title">Setting</string>
+    <string name="switch_exercise_share_activity_level_title">Share activity level</string>
+    <string name="btn_exercise_inactivity_detection_title">Inactivity detection</string>
+    <string name="btn_exercise_change_goal_title">Change goal</string>
+    <string name="btn_exercise_tutorial_title">View tutorial</string>
+    <string name="dropdown_exercise_daily_step_goal_title">Set daily steps</string>
 
     <!-- Fall detection 환경설정 -->
     <string name="falldetection_sensitivity_title">Sensitivity</string>
@@ -58,14 +75,14 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="first_contact">1st contact</string>
+    <string name="second_contact">2nd contact</string>
+    <string name="third_contact">3rd contact</string>
+    <string name="switch_setting_cascading_title">Use Cascading Alarms</string>
+    <string name="btn_setting_contact_intent_title">Emergency contacts</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_risk_setting">RiskSettingActivity</string>
-    <string name="risk_menu_setting_title">Setting</string>
-    <string name="switch_risk_share_fall_risk_title">Share fall risk</string>
-    <string name="btn_risk_setting_tutorial_title">View tutorial</string>
-    <string name="btn_risk_setting_diagnosis_title">Fear of falling questionnaire</string>
-    <string name="btn_risk_setting_question_title">Fear of fall questionnaire</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
 
 

@@ -2,6 +2,10 @@ package com.example.boxtypetemplate
 
 import android.app.ActivityManager
 import android.content.*
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
@@ -14,7 +18,19 @@ import com.example.boxtypetemplate.video.videoActivity
 import com.example.boxtypetemplate.risk.RiskActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SensorEventListener{
+
+    private val sensorManager by lazy {
+        getSystemService(Context.SENSOR_SERVICE) as SensorManager  //센서 매니저에대한 참조를 얻기위함
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        //
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        Log.d("sensor", "${event!!.values[0]}, ${event!!.values[1]}, ${event!!.values[2]}}")
+    }
     var bluetoothLeService : BluetoothLeService? = null
     private val gattUpdateReceiver = object : BroadcastReceiver(){
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -111,6 +127,10 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        sensorManager.registerListener(this,
+            sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+            SensorManager.SENSOR_DELAY_NORMAL
+        )
 
     }
 

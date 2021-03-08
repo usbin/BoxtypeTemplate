@@ -78,6 +78,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/btn_name_exercise"
                 android:textSize="20dp"
+                android:drawableTop="@drawable/main_exercise_btn_icon"
                 app:layout_constraintEnd_toEndOf="@+id/btn_main_risk"
                 app:layout_constraintStart_toStartOf="@+id/btn_main_risk"
                 app:layout_constraintTop_toBottomOf="@+id/btn_main_risk" />

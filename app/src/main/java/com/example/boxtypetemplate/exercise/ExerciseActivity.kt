@@ -1,23 +1,76 @@
 package com.example.boxtypetemplate.exercise
 
+import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.ContextMenu
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.boxtypetemplate.R
+import com.example.boxtypetemplate.risk.RiskSettingActivity
 import kotlinx.android.synthetic.main.activity_exercise.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ExerciseActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class ExerciseActivity : AppCompatActivity(){
     var todayWeekOfMonth = Calendar.getInstance().get(Calendar.WEEK_OF_MONTH)
     var todayWeekday = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
     var selectedTab = todayWeekday
     val sampleDate = arrayListOf<WeekdayData>()
     val sampleDateStringList = arrayListOf<String>()
+    var spinnerListener = object : AdapterView.OnItemSelectedListener {
+        override fun onNothingSelected(parent: AdapterView<*>?) { }
+        override fun onItemSelected( parent: AdapterView<*>?,  view: View?,  position: Int,  id: Long) {
+            //문자열 파싱
+            val selectedDateString = spinner_exercise_calender.selectedItem.toString().split(Regex("""\s*[~()]\s*"""))[0]
+            when(selectedDateString){
+                sampleDateStringList[0] -> {
 
+                }
+                sampleDateStringList[1] -> {
+
+                }
+                sampleDateStringList[2] -> {
+
+                }
+                sampleDateStringList[3] -> {
+
+                }
+            }
+            //미래 날짜의 요일 비활성화
+            disableFutureWeekdayBtn()
+            //일요일이 선택된 상태로 변경
+            selectedTab = Calendar.SUNDAY
+            setTabSelected(Calendar.SUNDAY)
+            //여기에서 월요일 데이터 넣기
+            tv_exercise_goal.text = "$selectedDateString's $selectedTab's goal"
+        }
+    }
+    var detailsBtnListener = object : View.OnClickListener{
+        override fun onClick(v: View?) {
+            when(fl_exercise_content.visibility){
+                View.VISIBLE -> {
+                    fl_exercise_content.isClickable = false
+                    fl_exercise_content.visibility = View.INVISIBLE
+                    fl_exercise_content_details.isClickable = true
+                    fl_exercise_content_details.visibility = View.VISIBLE
+                    btn_exercise_toggle_content.text = "< Back"
+                }
+                View.INVISIBLE ->{
+                    fl_exercise_content.isClickable = true
+                    fl_exercise_content.visibility = View.VISIBLE
+                    fl_exercise_content_details.isClickable = false
+                    fl_exercise_content_details.visibility = View.INVISIBLE
+                    btn_exercise_toggle_content.text = "details >"
+                }
+            }
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
@@ -54,54 +107,25 @@ class ExerciseActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
         //spinner 어댑터, 리스너, 기본값 설정
         spinner_exercise_calender.adapter =
             ArrayAdapter(this, R.layout.spinneritem_exercise, sampleDateStringList)
-        spinner_exercise_calender.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) { }
-                override fun onItemSelected( parent: AdapterView<*>?,  view: View?,  position: Int,  id: Long) {
-                    //미래 날짜의 요일 비활성화
-                    disableFutureWeekdayBtn()
-                    //일요일이 선택된 상태로 변경
-                    setTabSelected(Calendar.SUNDAY)
-                }
-            }
+        spinner_exercise_calender.onItemSelectedListener = spinnerListener
         spinner_exercise_calender.apply{ setSelection(adapter.count-1) }
 
-        //탭 초기 설정, 최초 실행시 오늘 선택하도록 설정, 오늘 이후의 요일 비활성화
-        disableFutureWeekdayBtn()
+
+        //탭 초기 설정.
+        // - 최초 실행시 오늘 선택하도록 설정(현재 적용되지 않음...)
+        // - 오늘 이후의 요일 비활성화
+        selectedTab = todayWeekday
         setTabSelected(todayWeekday)
+        disableFutureWeekdayBtn()
+
         //탭 동작 구현
         initAllTabListener()
 
-        btn_exercise_toggle_content.setOnClickListener {
-            when(fl_exercise_content.visibility){
-                View.VISIBLE -> {
-                    fl_exercise_content.isClickable = false
-                    fl_exercise_content.visibility = View.INVISIBLE
-                    fl_exercise_content_details.isClickable = true
-                    fl_exercise_content_details.visibility = View.VISIBLE
-                    btn_exercise_toggle_content.text = "< Back"
-                }
-                View.INVISIBLE ->{
-                    fl_exercise_content.isClickable = true
-                    fl_exercise_content.visibility = View.VISIBLE
-                    fl_exercise_content_details.isClickable = false
-                    fl_exercise_content_details.visibility = View.INVISIBLE
-                    btn_exercise_toggle_content.text = "details >"
-                }
-            }
-
-        }
+        //details 버튼 토글 구현
+        btn_exercise_toggle_content.setOnClickListener(detailsBtnListener)
     }
 
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        TODO("Not yet implemented")
-    }
-
+    //----------------------- 탭 동작 -----------------------------
     //선택된 주차가 이번주일 때만 동작하며, 미래의 요일을 비활성화.
     private fun disableFutureWeekdayBtn(){
         setAllTabEnabled(true)
@@ -161,6 +185,8 @@ class ExerciseActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
     }
     private fun setTabSelected(weekday : Int){
         setAllTabDisslected()
+        Log.d("exercise", "!$weekday")
+        //여기서 각 요일 데이터 넣기
         when(weekday){
             Calendar.SUNDAY -> { btn_exercise_sun.isSelected = true }
             Calendar.MONDAY -> { btn_exercise_mon.isSelected = true }
@@ -197,6 +223,22 @@ class ExerciseActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
         btn_exercise_thu.isEnabled = b
         btn_exercise_fri.isEnabled = b
         btn_exercise_sat.isEnabled = b
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.exercise_menu, menu)
+        return true;
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.exercise_menu_setting -> {
+                val intent = Intent(this, ExerciseSettingActivity::class.java)
+                startActivity(intent)
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
 

@@ -23,6 +23,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".SettingContactActivity"></activity>
+        <activity android:name=".exercise.ExerciseTutorialActivity" />
+        <activity android:name=".exercise.ExerciseSettingGoalActivity" />
+        <activity
+            android:name=".exercise.ExerciseSettingActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".exercise.ExerciseActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />

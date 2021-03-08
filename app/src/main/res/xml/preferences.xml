@@ -1,9 +1,14 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory>
-
-
-
+        <PreferenceScreen
+            app:key="btn_setting_contact_intent"
+            app:title="@string/btn_setting_contact_intent_title">
+            <intent
+                android:targetPackage="com.example.boxtypetemplate"
+                android:targetClass="com.example.boxtypetemplate.SettingContactActivity"/>
+        </PreferenceScreen>
     </PreferenceCategory>
 
     <PreferenceCategory>

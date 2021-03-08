@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <DropDownPreference
+        android:key="dropdown_exercise_daily_step_goal"
+        android:title="@string/dropdown_exercise_daily_step_goal_title"
+        android:entries="@array/exercise_daily_step_goal_value"
+        app:useSimpleSummaryProvider="true"
+        android:entryValues="@array/exercise_daily_step_goal_value">
+
+    </DropDownPreference>
+
+</PreferenceScreen>
